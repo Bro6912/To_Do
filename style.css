@@ -1,0 +1,310 @@
+/* --- Sophisticated Blackish-Grey Palette Tokens --- */
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --ring-bg: #e2e8f0;
+    --border-line: #edf2f7;
+    
+    --btn-pause-bg: #f1f5f9;
+    --btn-pause-hover: #e2e8f0;
+    --btn-pause-active: #cbd5e1;
+    
+    /* True Crimson Accent Elements */
+    --color-work: #e11d48;
+    --color-short: #2563eb;
+    --color-long: #16a34a;
+    --primary-color: var(--color-work);
+    
+    --shadow-main: 0 4px 20px rgba(0, 0, 0, 0.02);
+    --transition-speed: 0.25s;
+}
+
+[data-theme="dark"] {
+    /* Pure Black changed to Charcoal Blackish-Grey UI profile */
+    --bg-color: #1a1a1e;
+    --card-bg: #222227;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --ring-bg: #2e2e36;
+    --border-line: #32323b;
+    
+    --btn-pause-bg: #2e2e36;
+    --btn-pause-hover: #3e3e48;
+    --btn-pause-active: #4a4a56;
+    --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Base Layout Rules --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+/* --- Top Bar Accessories --- */
+.utility-bar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.util-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-line);
+    color: var(--text-main);
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-main);
+    transition: transform 0.2s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+}
+.util-btn:hover { transform: scale(1.04); }
+.util-btn svg { width: 20px; height: 20px; position: absolute; }
+
+[data-theme="dark"] .icon-moon { opacity: 0; transform: scale(0); }
+[data-theme="dark"] .icon-sun { opacity: 1; transform: scale(1); }
+html:not([data-theme="dark"]) .icon-sun { opacity: 0; transform: scale(0); }
+html:not([data-theme="dark"]) .icon-moon { opacity: 1; transform: scale(1); }
+
+/* --- Layout Adaptive Tri-Column Workspace Grid --- */
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 280px 400px 280px;
+    gap: 30px;
+    width: 100%;
+    max-width: 1120px;
+    padding: 40px 20px;
+    align-items: start;
+}
+
+/* --- Modular Sidebar Panels (Configuration & Instructional Manual) --- */
+.config-panel, .guide-panel {
+    background: var(--card-bg);
+    padding: 1.8rem;
+    border-radius: 24px;
+    border: 1px solid var(--border-line);
+    box-shadow: var(--shadow-main);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.3px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Form Settings Styling Components — Refactored for full-width responsive box fitting */
+.input-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    margin-bottom: 1.25rem; 
+}
+.input-group label { 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    color: var(--text-muted); 
+}
+.numeric-inputs { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    width: 100%; 
+}
+
+.numeric-inputs input {
+    flex: 1;
+    min-width: 0;
+}
+
+.numeric-inputs input, .block-field {
+    background: var(--bg-color);
+    border: 1px solid var(--border-line);
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem;
+    border-radius: 12px;
+    text-align: center;
+    font-family: inherit;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed);
+}
+.numeric-inputs input:focus, .block-field:focus { outline: none; border-color: var(--primary-color); }
+.block-field { width: 100%; text-align: left; padding-left: 16px; }
+.numeric-inputs span { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; user-select: none; }
+
+/* Guide Panel Explanatory Blocks */
+.guide-item {
+    margin-bottom: 1.25rem;
+}
+.guide-item:last-child { margin-bottom: 0; }
+.guide-item h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+.guide-item p, .guide-item li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+.guide-item ul {
+    list-style-position: inside;
+    margin-top: 4px;
+}
+
+/* --- Center Core Dashboard Component --- */
+.timer-area { display: flex; flex-direction: column; gap: 16px; }
+
+.container {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 28px;
+    border: 1px solid var(--border-line);
+    box-shadow: var(--shadow-main);
+    text-align: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.timer-header h1 { font-size: 1.75rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.25rem; }
+.session-count { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+#completed-count { color: var(--primary-color); font-weight: 700; }
+
+/* --- Radial Metric Circle Dial Display --- */
+.timer-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-ring { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+.progress-ring__background { stroke: var(--ring-bg); transition: stroke var(--transition-speed); }
+.progress-ring__circle {
+    stroke: var(--primary-color);
+    transition: stroke-dashoffset 0.1s linear, stroke var(--transition-speed);
+}
+
+.timer-display {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Control Command Button Configurations --- */
+.controls { display: flex; gap: 12px; }
+
+.btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.85rem 1.2rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.08s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+.btn:not(:disabled):active { transform: scale(0.96); }
+
+.btn-start { background-color: var(--primary-color); color: white; flex: 2; }
+.btn-start:hover:not(:disabled) { opacity: 0.9; }
+
+.btn-pause { background-color: var(--btn-pause-bg); color: var(--text-main); flex: 1; }
+.btn-pause:hover:not(:disabled) { background-color: var(--btn-pause-hover); }
+.btn-pause:active:not(:disabled) { background-color: var(--btn-pause-active); }
+
+.btn-reset { background-color: transparent; border: 1px solid var(--border-line); color: var(--text-muted); flex: 1; }
+.btn-reset:hover { background-color: var(--btn-pause-bg); color: var(--text-main); }
+
+.btn-apply { background-color: var(--text-main); color: var(--card-bg); width: 100%; margin-top: 0.5rem; }
+.btn-apply:hover { opacity: 0.85; }
+
+.btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none !important; }
+
+/* --- Notification Toggles Footer Panel --- */
+.preferences-panel {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border-line);
+    box-shadow: var(--shadow-main);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+.preference-row { display: flex; justify-content: space-between; align-items: center; }
+.preference-info { display: flex; flex-direction: column; gap: 2px; text-align: left; }
+.preference-title { font-size: 0.9rem; font-weight: 600; }
+.preference-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Tactile Slider Switch Setup */
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--ring-bg);
+    border-radius: 24px;
+    transition: background-color 0.2s ease;
+}
+.slider:before {
+    position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+input:checked + .slider { background-color: var(--color-long); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* --- Media Breakpoints (Responsive Tablet/Mobile Reflow Mapping) --- */
+@media (max-width: 1024px) {
+    .workspace-grid {
+        grid-template-columns: 100%;
+        gap: 24px;
+        padding: 80px 20px 40px 20px;
+    }
+    .config-panel { order: 2; }
+    .timer-area { order: 1; }
+    .guide-panel { order: 3; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 2rem 1.25rem; }
+    .timer-container { width: 230px; height: 230px; }
+    .progress-ring { width: 230px; height: 230px; }
+    .progress-ring circle { cx: 115px; cy: 115px; r: 100px; }
+    .timer-display { font-size: 3rem; }
+}

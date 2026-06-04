@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+
+    <!-- Top Navigation Utility Bar -->
+    <div class="utility-bar">
+        <button id="theme-toggle-btn" class="util-btn" aria-label="Toggle dark mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        </button>
+    </div>
+
+    <!-- Main Workspace Layout Grid -->
+    <div class="workspace-grid">
+        
+        <!-- Left Column Component: Parameter Configurations -->
+        <section class="config-panel">
+            <h2 class="section-title">Configuration</h2>
+            
+            <div class="input-group">
+                <label>Work Duration</label>
+                <div class="numeric-inputs">
+                    <input type="number" id="input-work-min" value="25"><span>m</span>
+                    <input type="number" id="input-work-sec" value="0"><span>s</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Short Break</label>
+                <div class="numeric-inputs">
+                    <input type="number" id="input-short-min" value="5"><span>m</span>
+                    <input type="number" id="input-short-sec" value="0"><span>s</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Long Break</label>
+                <div class="numeric-inputs">
+                    <input type="number" id="input-long-min" value="15"><span>m</span>
+                    <input type="number" id="input-long-sec" value="0"><span>s</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="input-target-sessions">Long Break Interval</label>
+                <input type="number" id="input-target-sessions" value="4" class="block-field">
+            </div>
+
+            <button id="btn-save-settings" class="btn btn-apply">Apply Changes</button>
+        </section>
+
+        <!-- Center Column Component: Main Timer Interface -->
+        <div class="timer-area">
+            <main class="container">
+                <header class="timer-header">
+                    <h1 id="current-mode">Work Session</h1>
+                    <p class="session-count">Interval: <span id="completed-count">0</span>/<span id="target-count-display">4</span></p>
+                </header>
+
+                <!-- Dial Progress Interface -->
+                <div class="timer-container">
+                    <svg class="progress-ring" width="280" height="280">
+                        <circle class="progress-ring__background" stroke-width="6" fill="transparent" r="125" cx="140" cy="140"/>
+                        <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="125" cx="140" cy="140"/>
+                    </svg>
+                    <div class="timer-display" id="time-left">25:00</div>
+                </div>
+
+                <!-- Control Button Matrix -->
+                <div class="controls">
+                    <button id="btn-start" class="btn btn-start">Start</button>
+                    <button id="btn-pause" class="btn btn-pause" disabled>Pause</button>
+                    <button id="btn-reset" class="btn btn-reset">Reset</button>
+                </div>
+            </main>
+
+            <!-- Sound Toggle Module -->
+            <section class="preferences-panel">
+                <div class="preference-row">
+                    <div class="preference-info">
+                        <span class="preference-title">Audio Notification</span>
+                        <span class="preference-desc">Chime upon session completion</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-chk" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column Component: Operational Guide Manual -->
+        <section class="guide-panel">
+            <h2 class="section-title">How to Use</h2>
+            
+            <div class="guide-item">
+                <h3>Adjusting Parameters</h3>
+                <p>Type values into the input fields on the left. Press <strong>Apply Changes</strong> to update your timer defaults. Adjusting values mid-session will stop the current countdown.</p>
+            </div>
+
+            <div class="guide-item">
+                <h3>Interval Cycles</h3>
+                <p>The <strong>Long Break Interval</strong> dictates how many standard <em>Work Sessions</em> you run before earning a prolonged rest phase (e.g., 4 intervals).</p>
+            </div>
+
+            <div class="guide-item">
+                <h3>Dashboard Controls</h3>
+                <ul>
+                    <li><strong>Start:</strong> Commences the runtime countdown tracking stream.</li>
+                    <li><strong>Pause:</strong> Temporarily freezes countdown progression.</li>
+                    <li><strong>Reset:</strong> Restores current countdown mode to its defined default time template.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Alarm Audio Element -->
+    <audio id="alarm-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-default.wav" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
