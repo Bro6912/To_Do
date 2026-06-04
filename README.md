@@ -1,6 +1,6 @@
 # Pomodoro Timer
 
-A simple Pomodoro timer website using HTML, CSS, and JavaScript.
+A simple Pomodoro timer website
 
 ## Get Started
 
